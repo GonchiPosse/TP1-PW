@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumnos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="layout">
+        <nav class="menu-vertical">
+            <a href="Overview.html">Inicio</a>
+            <a href="Alumno.html" class="selected">Alumnos</a>
+            <a href="Alta.html">Alta Alumno</a>
+        </nav>
+        <div class="content">
+            <header>
+                <h2>Lista de Alumnos</h2>
+                <button class="add-button" onclick="window.location.href='Alta.html'">Agregar Alumno</button>
+            </header>
+            <section>
+                <input type="text" placeholder="Buscar alumno...">
+                <button>Buscar</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Legajo</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-table">
+                        <!-- Aquí se llenará la tabla con JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
