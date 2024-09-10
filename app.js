@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tbody.innerHTML = ''; // Limpiar la tabla
         alumnos.forEach(alumno => {
             let tr = document.createElement("tr");
-            tr.innerHTML = '<td>${alumno.legajo}</td><td>${alumno.nombre}</td><td>${alumno.apellido}</td>';
+            tr.innerHTML = `<td>${alumno.legajo}</td><td>${alumno.nombre}</td><td>${alumno.apellido}</td>`;
             tbody.appendChild(tr);
         });
     }
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         alumnos.filter(alumno => alumno.nombre.toLowerCase().includes(searchText) || alumno.apellido.toLowerCase().includes(searchText))
             .forEach(alumno => {
                 let tr = document.createElement("tr");
-                tr.innerHTML = '<td>${alumno.legajo}</td><td>${alumno.nombre}</td><td>${alumno.apellido}</td>';
+                tr.innerHTML = `<td>${alumno.legajo}</td><td>${alumno.nombre}</td><td>${alumno.apellido}</td>`;
                 tbody.appendChild(tr);
             });
     });
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alumnos.push(nuevoAlumno);
             guardarAlumnos(alumnos);
             alert("Alumno agregado con éxito");
-            window.location.href = "alumnos.html"; // Redirigir a la lista
+            window.location.href = "Alumno.html"; // Redirigir a la lista
         }
     });
 
