@@ -1,45 +1,64 @@
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('add-student-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const nombre = document.getElementById('nombre').value;
-        const apellido = document.getElementById('apellido').value;
-
-        fetch('/api/alumnos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ nombre, apellido })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Alumno agregado:', data);
-            window.location.href = 'alumno.html';  // Redirigir a la página de alumnos
-        })
-        .catch(error => console.error('Error al agregar el alumno:', error));
-    });
-
-    function loadStudents() {
-        fetch('/api/alumnos')
-        .then(response => response.json())
-        .then(students => {
-            const tableBody = document.getElementById('student-table');
-            tableBody.innerHTML = '';  // Limpiar la tabla antes de llenarla
-
-            students.forEach(student => {
-                const row = `
-                    <tr>
-                        <td>${student.legajo}</td>
-                        <td>${student.nombre}</td>
-                        <td>${student.apellido}</td>
-                    </tr>
-                `;
-                tableBody.innerHTML += row;
-            });
-        })
-        .catch(error => console.error('Error al cargar los alumnos:', error));
+document.addEventListener("DOMContentLoaded", function () {
+    // Función para obtener alumnos del localStorage
+    function obtenerAlumnos() {
+        let alumnos = localStorage.getItem("alumnos");
+        if (alumnos) {
+            return JSON.parse(alumnos);
+        } else {
+            return [];
+        }
     }
 
-    window.onload = loadStudents;
+    // Función para guardar alumnos en localStorage
+    function guardarAlumnos(alumnos) {
+        localStorage.setItem("alumnos", JSON.stringify(alumnos));
+    }
+
+    // Mostrar alumnos en la tabla
+    function mostrarAlumnos() {
+        const alumnos = obtenerAlumnos();
+        const tbody = document.getElementById("alumnoTableBody");
+        tbody.innerHTML = ''; // Limpiar la tabla
+        alumnos.forEach(alumno => {
+            let tr = document.createElement("tr");
+            tr.innerHTML = '<td>${alumno.legajo}</td><td>${alumno.nombre}</td><td>${alumno.apellido}</td>';
+            tbody.appendChild(tr);
+        });
+    }
+
+    // Buscar alumnos
+    document.getElementById("searchInput")?.addEventListener("input", function () {
+        const searchText = this.value.toLowerCase();
+        const alumnos = obtenerAlumnos();
+        const tbody = document.getElementById("alumnoTableBody");
+        tbody.innerHTML = ''; // Limpiar la tabla
+        alumnos.filter(alumno => alumno.nombre.toLowerCase().includes(searchText) || alumno.apellido.toLowerCase().includes(searchText))
+            .forEach(alumno => {
+                let tr = document.createElement("tr");
+                tr.innerHTML = '<td>${alumno.legajo}</td><td>${alumno.nombre}</td><td>${alumno.apellido}</td>';
+                tbody.appendChild(tr);
+            });
+    });
+
+    // Procesar formulario de alta de alumno
+    document.getElementById("alumnoForm")?.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const nombre = document.getElementById("nombre").value;
+        const apellido = document.getElementById("apellido").value;
+
+        if (nombre && apellido) {
+            const alumnos = obtenerAlumnos();
+            const legajo = alumnos.length + 1; // Generar legajo único
+            const nuevoAlumno = { legajo, nombre, apellido };
+            alumnos.push(nuevoAlumno);
+            guardarAlumnos(alumnos);
+            alert("Alumno agregado con éxito");
+            window.location.href = "alumnos.html"; // Redirigir a la lista
+        }
+    });
+
+    // Mostrar alumnos si estamos en la página de alumnos
+    if (document.getElementById("alumnoTableBody")) {
+        mostrarAlumnos();
+    }
 });

@@ -3,39 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alumnos</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Listado de Alumnos</title>
+    <link rel="stylesheet" href="layout.css">
 </head>
 <body>
-    <div class="layout">
-        <nav class="menu-vertical">
-            <a href="Overview.html">Inicio</a>
-            <a href="Alumno.html" class="selected">Alumnos</a>
-            <a href="Alta.html">Alta Alumno</a>
-        </nav>
-        <div class="content">
-            <header>
-                <h2>Lista de Alumnos</h2>
-                <button class="add-button" onclick="window.location.href='Alta.html'">Agregar Alumno</button>
-            </header>
-            <section>
-                <input type="text" placeholder="Buscar alumno...">
-                <button>Buscar</button>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Legajo</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                        </tr>
-                    </thead>
-                    <tbody id="student-table">
-                        <!-- Aquí se llenará la tabla con JavaScript -->
-                    </tbody>
-                </table>
-            </section>
-        </div>
+
+<div class="menu">
+    <a href="overview.html">Overview</a>
+    <a href="alumnos.html" class="selected">Alumnos</a>
+    <a href="alta-alumno.html">Alta de Alumno</a>
+</div>
+
+<div class="container">
+    <div class="header">
+        <h2>Listado de Alumnos</h2>
+        <button onclick="window.location.href='alta-alumno.html'">Agregar Alumno</button>
     </div>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar por nombre o apellido">
+        <button onclick="buscarAlumno()">Buscar</button>
+    </div>
+
+    <table border="1" style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>Legajo</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+            </tr>
+        </thead>
+        <tbody id="alumnoTableBody">
+            <!-- Los alumnos se insertarán aquí dinámicamente -->
+        </tbody>
+    </table>
+
     <script src="app.js"></script>
+</div>
+
 </body>
 </html>
