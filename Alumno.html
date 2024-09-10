@@ -17,14 +17,14 @@
 <div class="container">
     <div class="header">
         <h2>Listado de Alumnos</h2>
-        <button onclick="window.location.href='alta-alumno.html'">Agregar Alumno</button>
+        <button onclick="window.location.href='Alta.html'">Agregar Alumno</button>
     </div>
 
     <div class="search-bar">
         <input type="text" id="searchInput" placeholder="Buscar por nombre o apellido">
         <button onclick="buscarAlumno()">Buscar</button>
     </div>
-
+    
     <table border="1" style="width: 100%; border-collapse: collapse;">
         <thead>
             <tr>
@@ -37,6 +37,7 @@
             <!-- Los alumnos se insertarán aquí dinámicamente -->
         </tbody>
     </table>
+    <div id="paginacion"></div> 
 
     <script src="app.js"></script>
 </div>
