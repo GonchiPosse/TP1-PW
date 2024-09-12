@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const rowsPerPage = 5; // Número de alumnos por página
+    let rowsPerPage = 5; // Número de alumnos por página por defecto
     let currentPage = 1;   // Página actual
 
     // Función para obtener alumnos del localStorage
@@ -15,6 +15,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // Función para guardar alumnos en localStorage
     function guardarAlumnos(alumnos) {
         localStorage.setItem("alumnos", JSON.stringify(alumnos));
+    }
+
+    // Función para cambiar la cantidad de filas por página
+    function cambiarFilasPorPagina() {
+        const select = document.getElementById("filasPorPagina");
+        rowsPerPage = parseInt(select.value); // Cambia el valor de filas por página
+        currentPage = 1;  // Reseteamos a la primera página para evitar errores
+        mostrarAlumnos(); // Llamamos a mostrar alumnos con el nuevo valor
     }
 
     // Función para mostrar los botones de paginación
@@ -98,9 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
             alumnos.push(nuevoAlumno);
             guardarAlumnos(alumnos);
 
-            // Depuración: Verificar si se guarda el alumno
-            console.log("Alumnos guardados:", obtenerAlumnos());
-
             alert("Alumno agregado con éxito");
 
             // Resetear a la primera página y mostrar los alumnos
@@ -119,5 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById("alumnoTableBody")) {
         mostrarAlumnos();
     }
+
+    // Hacer que la función esté disponible globalmente
+    window.cambiarFilasPorPagina = cambiarFilasPorPagina;
 });
-    

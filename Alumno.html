@@ -24,6 +24,16 @@
         <input type="text" id="searchInput" placeholder="Buscar por nombre o apellido">
         <button onclick="buscarAlumno()">Buscar</button>
     </div>
+
+    <div class="filas-por-pagina">
+        <label for="filasPorPagina">Filas por página:</label>
+        <select id="filasPorPagina" onchange="cambiarFilasPorPagina()">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="5" selected>5</option> <!-- Valor por defecto -->
+            <option value="10">10</option>
+        </select>
+    </div>
     
     <table border="1" style="width: 100%; border-collapse: collapse;">
         <thead>
