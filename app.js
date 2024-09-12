@@ -108,10 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             alert("Alumno agregado con éxito");
 
-            // Resetear a la primera página y mostrar los alumnos
-            currentPage = 1;
-            mostrarAlumnos();
-
             // Limpiar campos del formulario
             document.getElementById("nombre").value = '';
             document.getElementById("apellido").value = '';
